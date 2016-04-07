@@ -1,0 +1,13 @@
+#WebStorm
+.idea/workspace.xml
+
+#Mac OS X
+.DS_Store
+
+#npm - ignore all node module bin directories
+node_modules/**/.bin
+
+npm-debug.log
+
+#generated files
+generated/
