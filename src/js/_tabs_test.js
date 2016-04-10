@@ -9,29 +9,28 @@
         
        });
         
-        it("hides an element", function() {
+        it("sets a class on an element", function() {
             // arange
+            var someElementClass = "";
             var element = addElement("div");
             // act
-            tabs.initialize(element);
+            tabs.initialize(element, "hide");
         
             // assert
-            assert.equal(getDisplayProperty(element), "none");
+            assert.equal(getElementClass(element), "hide");
             
             //reset
             removeElement(element);
         });
         
+        function getElementClass(element) {
+            return element.getAttribute("class");
+        }
+        
         function addElement(tagName) {
             var element = document.createElement(tagName);
             document.body.appendChild(element);
             return element;
-        }
-        
-        function getDisplayProperty(element) {
-            var styles = getComputedStyle(element);
-            return styles.getPropertyValue("display");
-            
         }
         
         function removeElement(element) {
