@@ -1,3 +1,4 @@
+// video 27 8:50
 (function () {
     "use strict";
     var assert = require("./assert.js");
@@ -17,46 +18,47 @@
             removeElement(container);
         });
         
-        it("hides an element by setting a class", function() {
-            // arange
-            var element = addElement("div");
-            
-            // act
-            tabs.initialize([ element ], "hide");
-        
-            var currentClasses = "existingClass";
-            // assert
-            assert.equal(getElementClasses(element), "hide");
-            
-            //reset
-        });
-        
-        it("hides multiple elements by setting a class", function() {
+        it("hides all content elements except default on Tabs initialization", function() {
             var element1 = addElement("div");
-            var element2 = addElement("div");    
+            var defaultElement = addElement("div");    
             var element3 = addElement("div");   
             
-            tabs.initialize([ element1, element2, element3 ], "hideMe");
+            tabs.initialize(defaultElement, [ element1, defaultElement, element3 ], "hideMe");
             
-            assert.equal(getElementClasses(element1), "hideMe");
-            assert.equal(getElementClasses(element2), "hideMe"); 
-            assert.equal(getElementClasses(element3), "hideMe");             
+            assert.equal(getElementClasses(element1), "hideMe", "element1 should be hidden");
+            assert.equal(getElementClasses(defaultElement), "", "defaultElement should not be hidden"); 
+            assert.equal(getElementClasses(element3), "hideMe", "element3 should be hidden");             
         });
         
         
         it("preserves existing classes when adding a class to hide an element", function() {
             // arange
-            var element = addElement("div");
-            element.setAttribute("class","existingClass");
+            var hiddenElement = addElement("div");
+            var defaultElement = addElement("div");
+            
+            hiddenElement.setAttribute("class","existingClass");
             
             // act
-            tabs.initialize([ element ], "hide");
+            tabs.initialize(hiddenElement, [ hiddenElement, defaultElement ], "hide");
         
             var currentClasses = "existingClass";
             // assert
-            assert.equal(getElementClasses(element), currentClasses + " " +"hide");
+            assert.equal(getElementClasses(hiddenElement), currentClasses );
             
             //reset
+        });
+        
+        it("does not hide the content element for the active tag", function() {
+            var element1 = addElement("div");
+            var defaultElement = addElement("div");    
+            var element3 = addElement("div");   
+            var activeTab = defaultElement;
+           
+            tabs.initialize(defaultElement, [ element1, defaultElement, element3 ], "hideMe", activeTab); 
+            
+            assert.equal(getElementClasses(element1), "hideMe");
+            assert.equal(getElementClasses(defaultElement), ""); 
+            assert.equal(getElementClasses(element3), "hideMe"); 
         });
         
         function getElementClasses(element) {
