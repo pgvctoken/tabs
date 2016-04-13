@@ -5,49 +5,67 @@
     
     describe("Tabs", function() {
         
-       it("has an API", function() {
+        var container;
+       
+        beforeEach(function(){
+            container = document.createElement("div");
+            document.body.appendChild(container);
+            
+        });
         
-       });
+        afterEach(function(){
+            removeElement(container);
+        });
         
-        it("sets a class on an element without an existing class", function() {
+        it("hides an element by setting a class", function() {
             // arange
             var element = addElement("div");
             
             // act
-            tabs.initialize(element, "hide");
+            tabs.initialize([ element ], "hide");
         
             var currentClasses = "existingClass";
             // assert
-            assert.equal(getElementClass(element), "hide");
+            assert.equal(getElementClasses(element), "hide");
             
             //reset
-            //removeElement(element);
+        });
+        
+        it("hides multiple elements by setting a class", function() {
+            var element1 = addElement("div");
+            var element2 = addElement("div");    
+            var element3 = addElement("div");   
+            
+            tabs.initialize([ element1, element2, element3 ], "hideMe");
+            
+            assert.equal(getElementClasses(element1), "hideMe");
+            assert.equal(getElementClasses(element2), "hideMe"); 
+            assert.equal(getElementClasses(element3), "hideMe");             
         });
         
         
-        it("sets a class on an element with an existing class", function() {
+        it("preserves existing classes when adding a class to hide an element", function() {
             // arange
             var element = addElement("div");
             element.setAttribute("class","existingClass");
             
             // act
-            tabs.initialize(element, "hide");
+            tabs.initialize([ element ], "hide");
         
             var currentClasses = "existingClass";
             // assert
-            assert.equal(getElementClass(element), currentClasses + " " +"hide");
+            assert.equal(getElementClasses(element), currentClasses + " " +"hide");
             
             //reset
-            //removeElement(element);
         });
         
-        function getElementClass(element) {
+        function getElementClasses(element) {
             return element.getAttribute("class");
         }
         
         function addElement(tagName) {
             var element = document.createElement(tagName);
-            document.body.appendChild(element);
+            container.appendChild(element);
             return element;
         }
         

@@ -57,7 +57,7 @@
             configFile: KARMA_CONFIG,
             expectedBrowsers: [
                 "Firefox 45.0.0 (Ubuntu 0.0.0)",
-                "Chromium 49.0.2623 (Ubuntu 0.0.0)",
+                "Chrome 49.0.2623 (Chrome OS 7834.66.0)",
                 "Mobile Safari 9.0.0 (iOS 9.2.1)"
             ],
             strict: !process.env.loose
