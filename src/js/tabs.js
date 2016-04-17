@@ -8,22 +8,22 @@
         var content = options.content;
         var defaultTab = options.defaultTab;
         var activeTabClass = options.activeTabClass;
-        var contentHideClass = options.contentHideClass;
+        var hiddenContentClass = options.hiddenContentClass;
 
         var activeIndex = findIndexOfDefaultTab(tabs, defaultTab);
         var defaultContent = content[activeIndex];
                 
         if (defaultContent === undefined) throw new Error("Expected options.default");
         if (content === undefined) throw new Error("Expected options.content");
-        if (contentHideClass === undefined) throw new Error("Expected options.contentHideClass");
+        if (hiddenContentClass === undefined) throw new Error("Expected options.contentHideClass");
         if (tabs === undefined) throw new Error("Expected options.tabs");
         if (activeTabClass === undefined) throw new Error("Expected options.activeTabClass");
                 
         content.forEach(function(content) {
-            content.classList.add(contentHideClass);
+            content.classList.add(hiddenContentClass);
         });
         
-        defaultContent.classList.remove(contentHideClass);
+        defaultContent.classList.remove(hiddenContentClass);
         defaultTab.classList.add(activeTabClass);
     };
     

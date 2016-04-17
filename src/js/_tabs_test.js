@@ -35,7 +35,7 @@
                content: [ content1, defaultContent, content3 ],
                defaultTab: defaultTab,
                activeTabClass: IRRELEVANT,
-               contentHideClass: "hideClass" 
+               hiddenContentClass: "hideClass" 
             });
             assert.equal(getElementClasses(content1), "hideClass", "content1 should be hidden");
             assert.equal(getElementClasses(defaultContent), "", "defaultContent should not be hidden"); 
@@ -61,7 +61,7 @@
                content: [ defaultContent, hiddenContent ],
                defaultTab: defaultTab,
                activeTabClass: IRRELEVANT,
-               contentHideClass: "hideClass" 
+               hiddenContentClass: "hideClass" 
             });
             
             var currentClasses = "existingClass";
@@ -82,7 +82,7 @@
                 content: [ defaultContent ],
                 defaultTab: defaultTab,
                 activeTabClass: "activeTab",
-                contentHideClass: IRRELEVANT 
+                hiddenContentClass: IRRELEVANT 
             });
             
             assert.equal(getElementClasses(defaultTab), "activeTab");
@@ -110,7 +110,7 @@
                 content: [ content1, defaultContent, content3 ],
                 defaultTab: defaultTab,
                 activeTabClass: "activeTab",
-                contentHideClass: "hideClass" 
+                hiddenContentClass: "hideClass" 
             });            
             assert.equal(getElementClasses(content1), "hideClass");
             assert.equal(getElementClasses(defaultContent), ""); 
