@@ -4,24 +4,34 @@
     classList.shim();
     
     exports.initialize = function initialize(options) {
-        var defaultElement = options.default;
-        var elementList = options.content;
-        var className = options.contentHideClass;
         var tabs = options.tabs;
+        var content = options.content;
+        var defaultTab = options.defaultTab;
         var activeTabClass = options.activeTabClass;
-        
-        if (defaultElement === undefined) throw new Error("Expected options.default");
-        if (elementList === undefined) throw new Error("Expected options.content");
-        if (className === undefined) throw new Error("Expected options.contentHideClass");
+        var contentHideClass = options.contentHideClass;
+
+        var activeIndex = findIndexOfDefaultTab(tabs, defaultTab);
+        var defaultContent = content[activeIndex];
+                
+        if (defaultContent === undefined) throw new Error("Expected options.default");
+        if (content === undefined) throw new Error("Expected options.content");
+        if (contentHideClass === undefined) throw new Error("Expected options.contentHideClass");
         if (tabs === undefined) throw new Error("Expected options.tabs");
         if (activeTabClass === undefined) throw new Error("Expected options.activeTabClass");
                 
-        elementList.forEach(function(element) {
-            element.classList.add(className);
+        content.forEach(function(content) {
+            content.classList.add(contentHideClass);
         });
         
-        defaultElement.classList.remove(className);
-        if (tabs !== undefined) tabs[0].classList.add(activeTabClass);
+        defaultContent.classList.remove(contentHideClass);
+        defaultTab.classList.add(activeTabClass);
     };
+    
+    function findIndexOfDefaultTab(tabs, defaultTab) {
+        for (var i = 0; tabs.length; i++) {
+            if (tabs[i] === defaultTab) return i;
+        }
+        throw new Error("didn't find default in list");
+    }
     
 }());

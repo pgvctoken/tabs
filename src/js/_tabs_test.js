@@ -1,4 +1,4 @@
-// video 28git 
+// video 29
 (function () {
     "use strict";
     var assert = require("./assert.js");
@@ -16,7 +16,7 @@
         });
         
         afterEach(function(){
-            removeElement(container);
+            //removeElement(container);
         });
         
         it("hides all content elements except default on Tabs initialization", function() {
@@ -33,7 +33,7 @@
             tabs.initialize({
                 tabs: [ tab1, defaultTab, tab3 ],
                content: [ content1, defaultContent, content3 ],
-               default: defaultContent,
+               defaultTab: defaultTab,
                activeTabClass: IRRELEVANT,
                contentHideClass: "hideClass" 
             });
@@ -59,7 +59,7 @@
             tabs.initialize({
                 tabs: [ defaultTab, hiddenTab ],
                content: [ defaultContent, hiddenContent ],
-               default: defaultContent,
+               defaultTab: defaultTab,
                activeTabClass: IRRELEVANT,
                contentHideClass: "hideClass" 
             });
@@ -80,7 +80,7 @@
             tabs.initialize({
                 tabs: [ defaultTab ],
                 content: [ defaultContent ],
-                default: defaultContent,
+                defaultTab: defaultTab,
                 activeTabClass: "activeTab",
                 contentHideClass: IRRELEVANT 
             });
@@ -108,7 +108,7 @@
             tabs.initialize({
                 tabs: [ tab1, defaultTab, tab3 ],
                 content: [ content1, defaultContent, content3 ],
-                default: defaultContent,
+                defaultTab: defaultTab,
                 activeTabClass: "activeTab",
                 contentHideClass: "hideClass" 
             });            
