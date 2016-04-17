@@ -1,4 +1,4 @@
-// video 27 8:50
+// video 28
 (function () {
     "use strict";
     var assert = require("./assert.js");
@@ -23,11 +23,16 @@
             var defaultElement = addElement("div");    
             var element3 = addElement("div");   
             
-            tabs.initialize(defaultElement, [ element1, defaultElement, element3 ], "hideMe");
+            //tabs.initialize(defaultElement, [ element1, defaultElement, element3 ], "hideMe");
             
-            assert.equal(getElementClasses(element1), "hideMe", "element1 should be hidden");
+            tabs.initialize({
+               content: [ element1, defaultElement, element3 ],
+               default: defaultElement,
+               contentHideClass: "hideClass" 
+            });
+            assert.equal(getElementClasses(element1), "hideClass", "element1 should be hidden");
             assert.equal(getElementClasses(defaultElement), "", "defaultElement should not be hidden"); 
-            assert.equal(getElementClasses(element3), "hideMe", "element3 should be hidden");             
+            assert.equal(getElementClasses(element3), "hideClass", "element3 should be hidden");             
         });
         
         
@@ -39,11 +44,17 @@
             hiddenElement.setAttribute("class","existingClass");
             
             // act
-            tabs.initialize(hiddenElement, [ hiddenElement, defaultElement ], "hide");
-        
+            //tabs.initialize(hiddenElement, [ hiddenElement, defaultElement ], "hide");
+            
+            tabs.initialize({
+               content: [ defaultElement, hiddenElement ],
+               default: defaultElement,
+               contentHideClass: "hideClass" 
+            });
+            
             var currentClasses = "existingClass";
             // assert
-            assert.equal(getElementClasses(hiddenElement), currentClasses );
+            assert.equal(getElementClasses(hiddenElement), currentClasses + " hideClass"  );
             
             //reset
         });
@@ -54,11 +65,16 @@
             var element3 = addElement("div");   
             var activeTab = defaultElement;
            
-            tabs.initialize(defaultElement, [ element1, defaultElement, element3 ], "hideMe", activeTab); 
+            //tabs.initialize(defaultElement, [ element1, defaultElement, element3 ], "hideMe", activeTab); 
             
-            assert.equal(getElementClasses(element1), "hideMe");
+            tabs.initialize({
+               content: [ element1, defaultElement, element3 ],
+               default: defaultElement,
+               contentHideClass: "hideClass" 
+            });            
+            assert.equal(getElementClasses(element1), "hideClass");
             assert.equal(getElementClasses(defaultElement), ""); 
-            assert.equal(getElementClasses(element3), "hideMe"); 
+            assert.equal(getElementClasses(element3), "hideClass"); 
         });
         
         function getElementClasses(element) {
