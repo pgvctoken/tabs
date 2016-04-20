@@ -1,4 +1,4 @@
-// video 29
+// video 31
 (function () {
     "use strict";
     var assert = require("./assert.js");
@@ -43,7 +43,7 @@
         });
         
         
-        it("preserves existing classes when adding a class to hide an element", function() {
+        it("preserves existing classes when adding a class", function() {
             // arange
             var defaultTab = createTab();
             var hiddenTab = createTab();
@@ -52,22 +52,23 @@
             var defaultContent = createTabContent();
             
             hiddenContent.setAttribute("class","existingClass");
+            defaultTab.setAttribute("class", "existingClass");
             
             // act
             //tabs.initialize(hiddenContent, [ hiddenContent, defaultContent ], "hide");
             
             tabs.initialize({
                 tabs: [ defaultTab, hiddenTab ],
-               content: [ defaultContent, hiddenContent ],
-               defaultTab: defaultTab,
-               activeTabClass: IRRELEVANT,
-               hiddenContentClass: "hideClass" 
+                content: [ defaultContent, hiddenContent ],
+                defaultTab: defaultTab,
+                activeTabClass: "activeTabClass",
+                hiddenContentClass: "hideClass" 
             });
             
             var currentClasses = "existingClass";
             // assert
             assert.equal(getElementClasses(hiddenContent), currentClasses + " hideClass"  );
-            
+            assert.equal(getElementClasses(defaultTab), currentClasses + " activeTabClass" );
             //reset
         });
         
@@ -86,11 +87,6 @@
             });
             
             assert.equal(getElementClasses(defaultTab), "activeTab");
-        });
-        
-        it("preserves existing classes when styling the active Tab", function() {
-            // this is the same test basically as the preserves when 
-            // adding element to hidden Tabs
         });
         
         it("does not hide the content element for the active Tab", function() {
