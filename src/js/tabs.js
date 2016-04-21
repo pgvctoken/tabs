@@ -15,9 +15,9 @@
     };
     
     function handleTabClickEvent(tabs, options) {
-            tabs.forEach(function (tabsElement) {
-            tabsElement.addEventListener("click", function(event){
-                showTab(event.target, options);
+            tabs.forEach(function (tabElement) {
+            tabElement.addEventListener("click", function(){
+                showTab(tabElement, options);
             });
         });    
     }
@@ -33,7 +33,7 @@
            tab.classList.remove(options.activeTabClass); 
         });
         
-        contentToShow.classList.remove(options.hiddenContentClass);
+        if (contentToShow.classList.length > 0 ) contentToShow.classList.remove(options.hiddenContentClass);
         tabToShow.classList.add(options.activeTabClass);
     }
 
