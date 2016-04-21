@@ -11,19 +11,30 @@
         checkOptions(options.hiddenContentClass, "options.hiddenContentClass");
 
         showTab(options.defaultTab, options);
-
+        handleTabClickEvent(options.tabs, options);
     };
-         
+    
+    function handleTabClickEvent(tabs, options) {
+            tabs.forEach(function (tabsElement) {
+            tabsElement.addEventListener("click", function(event){
+                showTab(event.target, options);
+            });
+        });    
+    }
+    
     function showTab(tabToShow, options) {
-        var activeIndex = options.tabs.indexOf(options.defaultTab);
+        var activeIndex = options.tabs.indexOf(tabToShow);
         var contentToShow = options.content[activeIndex];
         
         options.content.forEach(function(content) {
             content.classList.add(options.hiddenContentClass);
         });
+        options.tabs.forEach(function(tab) {
+           tab.classList.remove(options.activeTabClass); 
+        });
         
         contentToShow.classList.remove(options.hiddenContentClass);
-        options.defaultTab.classList.add(options.activeTabClass);
+        tabToShow.classList.add(options.activeTabClass);
     }
 
     function checkOptions(option, name) {

@@ -119,6 +119,42 @@
             assertContentNotHidden(defaultContent, "default content");
         });
         
+        it("switches content when a tab is clicked", function() {
+            var tab1 = createTab();
+            var tab2 = createTab();
+            var tab3 = createTab();
+            
+            var content1 = createTabContent();
+            var content2 = createTabContent();    
+            var content3 = createTabContent();
+            content1.innerHTML="conten 1";
+            content2.innerHTML="conten 2";
+            content3.innerHTML="conten 3";
+            //tabs.initialize(defaultContent, [ content1, defaultContent, content3 ], "hideMe", activeTab); 
+            
+            tabs.initialize({
+                tabs: [ tab1, tab2, tab3 ],
+                content: [ content1, content2, content3 ],
+                defaultTab: tab1,
+                activeTabClass: ACTIVE_TAB,
+                hiddenContentClass: HIDDEN_CONTENT
+            });
+            
+            //tab1
+            tab1.click();
+            assertContentNotHidden(content1, "content1");  
+            //tab3
+            tab3.click();
+            assertContentNotHidden(content3, "content3");
+            assertContentHidden(content1, "content1");
+            assertContentHidden(content2, "content2");
+            assertTabActive(tab3, "tab3");
+            assertTabInactive(tab1, "tab1");          
+            //tab3
+            tab2.click();
+            assertContentNotHidden(content2, "content2");
+                        
+        });
         function assertContentHidden(element, elementName) {
             assert.equal(getElementClasses(element), HIDDEN_CONTENT, elementName + " should be hidden");
         }
