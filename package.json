@@ -20,6 +20,11 @@
     "simplebuild-jshint": "^1.3.0",
     "simplebuild-karma": "^1.0.0"
   },
+  "resolutions": {
+    "unset-value": "^2.0.1",
+    "shelljs": "^0.8.5",
+    "karma": "^6.3.14"
+  },
   "description": "How To: Tabs ============",
   "main": "jakefile.js",
   "dependencies": {
